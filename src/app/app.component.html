@@ -1,0 +1,29 @@
+
+
+<div class="row">
+  <div class="col" style="text-align: center;">
+    <p>// N-wfb25WmV4
+      // apKja6C804o</p>
+    <mat-form-field class="example-full-width">
+      <mat-label>Youtube Id</mat-label>
+      <input matInput
+             placeholder="My Youtube Url"
+             [(ngModel)]="youtubeUrl"
+             required>
+    </mat-form-field>
+    <p>
+      video-id: {{ videoId }}
+    </p>
+
+    <iframe *ngIf="isVideoIdDefined()"
+            [src]="iFrameUrl | safeUrl"
+            width="100%"
+            height="40px"
+            scrolling="no"
+            style="border:none;"></iframe>
+
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
