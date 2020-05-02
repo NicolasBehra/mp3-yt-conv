@@ -1,6 +1,6 @@
+import { ConverterModule } from './converter/converter.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { 
   registerLocaleData } from '@angular/common';
 import localeFr                   from '@angular/common/locales/fr';
@@ -12,29 +12,32 @@ import {
 } from '@angular/material/core';
 
 
-import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SafeUrlPipe } from './safe-url.pipe';
+import { SafeUrlPipeModule } from './safe-url.pipe.module';
+import { ArchiveService } from './archive.service';
 
 registerLocaleData(localeFr);
 @NgModule({
   declarations: [
-    AppComponent,
-    SafeUrlPipe,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     BrowserAnimationsModule,
 
-    MatInputModule,
+    ConverterModule,
+
+    SafeUrlPipeModule,
+
     MatTableModule,
     MatToolbarModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+
+    ArchiveService
   ],
   bootstrap: [AppComponent]
 })

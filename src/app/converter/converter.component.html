@@ -1,0 +1,23 @@
+<mat-form-field style="width: 70%;">
+  <mat-label>Youtube Url</mat-label>
+  <input matInput
+         placeholder="My Youtube Url"
+         [(ngModel)]="youtubeUrl"
+         onfocus="this.select()"
+         required>
+  <mat-error *ngIf="!isValidYoutubeUrl()">
+    Please enter a valid youtube url
+  </mat-error>
+</mat-form-field>
+<p>
+  video-id: {{ videoId }}
+</p>
+
+<div>
+  <iframe *ngIf="isValidYoutubeUrl()"
+          [src]="iFrameUrl | safeUrl"
+          width="100%"
+          height="40px"
+          scrolling="no"
+          style="border:none;"></iframe>
+</div>
