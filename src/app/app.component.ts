@@ -14,11 +14,15 @@ export class AppComponent {
   private _videoId: string = '';
 
   get videoId(): string {
-    if (this.youtubeUrl !== ''
-      && this.youtubeUrl !== this.prevYoutubeUrl) {
-        return this._videoId = this.youtubeUrl
-        .split('?v=')[1].split('&')[0];
-      }
+    if (
+      this.youtubeUrl !== ''
+      && this.youtubeUrl !== this.prevYoutubeUrl
+      && this.isValidYoutubeUrl()
+    ) {
+      this.prevYoutubeUrl = this.youtubeUrl;
+      return this._videoId = this.youtubeUrl
+      .split('?v=')[1].split('&')[0];
+    }
 
     return this._videoId;
   }
@@ -32,6 +36,21 @@ export class AppComponent {
 
   isVideoIdDefined(): boolean {
     return this.videoId && this.videoId.trim() !== '';
+  }
+
+  isValidYoutubeUrl(): boolean {
+    return (
+      this.youtubeUrl != null
+      && this.youtubeUrl != undefined
+      && this.youtubeUrl.indexOf('https://www.youtube.com/watch?v=') === 0
+      && this.youtubeUrl.split('&').length > 2
+    );
+  }
+
+  isUrl(text: string): boolean {
+    return new RegExp(
+      '^https:\/\/www\.youtube\.com\/watch\?'
+    ).test(text);
   }
 
 }
