@@ -1,3 +1,4 @@
+import { Archive } from './archive.model';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,10 +9,22 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   youtubeUrl: string = '';
+  archives: Array<Archive>;
+  displayedColumns: string[] = [
+    'date',
+    'url'
+  ];
 
   private prevYoutubeUrl: string = '';
-
   private _videoId: string = '';
+
+  constructor() {
+    this.youtubeUrl = '';
+    this.archives = [];
+
+    this.prevYoutubeUrl = '';
+    this._videoId = '';
+  }
 
   get videoId(): string {
     if (
@@ -20,6 +33,10 @@ export class AppComponent {
       && this.isValidYoutubeUrl()
     ) {
       this.prevYoutubeUrl = this.youtubeUrl;
+      this.archives.unshift(
+        new Archive(
+          this.youtubeUrl));
+
       return this._videoId = this.youtubeUrl
       .split('?v=')[1].split('&')[0];
     }
@@ -27,8 +44,6 @@ export class AppComponent {
     return this._videoId;
   }
 
-// N-wfb25WmV4
-// apKja6C804o
   get iFrameUrl(): string {
     return 'https://youtube2mp3api.com/@api/button/mp3/'
     + this.videoId;
