@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { option } from 'ts-option';
 
 import { ArchiveService } from './../archive.service';
 import { Archive } from '../archive.model';
+import { AbstractControl, FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-converter',
@@ -12,8 +16,12 @@ export class ConverterComponent {
 
   youtubeUrl: string = '';
 
+  youtubeUrlCtrl: AbstractControl;
+
   private prevYoutubeUrl: string = '';
+  private prevInput: string = '';
   private _videoId: string = '';
+  private _onDestroy = new Subject();
 
   constructor(
     private archiveService: ArchiveService
@@ -22,6 +30,32 @@ export class ConverterComponent {
 
     this.prevYoutubeUrl = '';
     this._videoId = '';
+    this.youtubeUrlCtrl = new FormControl();
+  }
+
+  ngOnInit() {
+    this.youtubeUrlCtrl
+    .valueChanges
+    .pipe(takeUntil(this._onDestroy))
+    .subscribe(
+      (data) => {        
+        if (
+          option(data).isDefined
+          && data.trim() !== ''
+          && data !== this.prevInput
+        ) {
+          this.prevInput = data;
+
+          if (this.isValidYoutubeUrl(data))
+            this.youtubeUrl = data;
+        }
+      }
+    )
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   get archives(): Array<Archive> {
@@ -32,12 +66,15 @@ export class ConverterComponent {
     if (
       this.youtubeUrl !== ''
       && this.youtubeUrl !== this.prevYoutubeUrl
-      && this.isValidYoutubeUrl()
+      && this.isValidYoutubeUrl(this.youtubeUrl)
     ) {
       this.prevYoutubeUrl = this.youtubeUrl;
-      this.archives.unshift(
-        new Archive(
-          this.youtubeUrl));
+      setTimeout(
+        () =>
+        this.archives.unshift(
+          new Archive(
+            this.youtubeUrl))
+        );
 
       return this._videoId = this.youtubeUrl
       .split('?v=')[1].split('&')[0];
@@ -52,15 +89,16 @@ export class ConverterComponent {
   }
 
   isVideoIdDefined(): boolean {
-    return this.videoId && this.videoId.trim() !== '';
+    return option(this.videoId).isDefined
+    && this.videoId.trim() !== '';
   }
 
-  isValidYoutubeUrl(): boolean {
+  isValidYoutubeUrl(url: string): boolean {
     return (
-      this.youtubeUrl != null
-      && this.youtubeUrl != undefined
-      && this.youtubeUrl.indexOf('https://www.youtube.com/watch?v=') === 0
-      && this.youtubeUrl.split('&').length > 2
+      option(url).isDefined
+      && url.trim() !== ''
+      && url.indexOf('https://www.youtube.com/watch?v=') === 0
+      && url.split('&').length > 2
     );
   }
 

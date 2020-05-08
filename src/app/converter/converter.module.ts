@@ -1,8 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConverterComponent } from './converter.component';
+import { NgModule } from '@angular/core';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+
+import { ConverterComponent } from './converter.component';
 import { SafeUrlPipeModule } from '../safe-url.pipe.module';
 
 
@@ -11,6 +15,7 @@ import { SafeUrlPipeModule } from '../safe-url.pipe.module';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 
     SafeUrlPipeModule,
 

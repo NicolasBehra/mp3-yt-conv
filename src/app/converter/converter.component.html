@@ -2,10 +2,10 @@
   <mat-label>Youtube Url</mat-label>
   <input matInput
          placeholder="My Youtube Url"
-         [(ngModel)]="youtubeUrl"
+         [formControl]="youtubeUrlCtrl"
          onfocus="this.select()"
          required>
-  <mat-error *ngIf="!isValidYoutubeUrl()">
+  <mat-error *ngIf="!isValidYoutubeUrl(youtubeUrlCtrl.value)">
     Please enter a valid youtube url
   </mat-error>
 </mat-form-field>
@@ -14,7 +14,7 @@
 </p>
 
 <div>
-  <iframe *ngIf="isValidYoutubeUrl()"
+  <iframe *ngIf="isValidYoutubeUrl(youtubeUrlCtrl.value)"
           [src]="iFrameUrl | safeUrl"
           width="100%"
           height="40px"
