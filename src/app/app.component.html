@@ -3,8 +3,17 @@
 <mat-toolbar color="accent">MP3 Youtbe Converter</mat-toolbar>
 
 <div class="row" style="padding-top: 20px;">
-  <div class="col" style="text-align: center;">
-    <app-converter></app-converter>
+  <div class="col-3" style="text-align: center;">
+    <app-converter [color]="'#EF476F'"></app-converter>
+  </div>
+  <div class="col-3" style="text-align: center;">
+    <app-converter [color]="'#FFD166'"></app-converter>
+  </div>
+  <div class="col-3" style="text-align: center;">
+    <app-converter [color]="'#06D6A0'"></app-converter>
+  </div>
+  <div class="col-3" style="text-align: center;">
+    <app-converter [color]="'#118AB2'"></app-converter>
   </div>
   <div *ngIf="isArchivesDefined()" style="padding: 60px">
     <h2>Historique</h2>
@@ -29,7 +38,9 @@
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+          [style.background-color]="row.color"></tr>
     </table>
   </div>
 </div>

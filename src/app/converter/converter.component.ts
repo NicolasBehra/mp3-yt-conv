@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { option } from 'ts-option';
 
 import { ArchiveService } from './../archive.service';
@@ -14,8 +14,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ConverterComponent {
 
-  youtubeUrl: string = '';
+  @Input() color: string = 'white';
 
+  youtubeUrl: string = '';
   youtubeUrlCtrl: AbstractControl;
 
   private prevYoutubeUrl: string = '';
@@ -73,7 +74,8 @@ export class ConverterComponent {
         () =>
         this.archives.unshift(
           new Archive(
-            this.youtubeUrl))
+            this.youtubeUrl,
+            this.color))
         );
 
       return this._videoId = this.youtubeUrl

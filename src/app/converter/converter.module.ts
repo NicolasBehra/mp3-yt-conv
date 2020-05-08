@@ -4,7 +4,9 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ConverterComponent } from './converter.component';
 import { SafeUrlPipeModule } from '../safe-url.pipe.module';
@@ -19,6 +21,8 @@ import { SafeUrlPipeModule } from '../safe-url.pipe.module';
 
     SafeUrlPipeModule,
 
+    MatButtonModule,
+    MatIconModule,
     MatInputModule
   ],
   exports: [ ConverterComponent ]

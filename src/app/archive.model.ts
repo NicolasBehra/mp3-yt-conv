@@ -4,19 +4,23 @@ export class Archive {
 
   url : string;
   date: Date;
+  color: string;
 
   constructor();
 
   constructor(
-    _url?: string
+    _url?  : string,
+    _color?: string
   )
 
   constructor(
-    _url?: string,
-    _date?: Date
+    _url?  : string,
+    _color?: string,
+    _date? : Date
   ) {
-    this.date = _date || new Date();
-    this.url  = _url  || '';
+    this.date  = _date  || new Date();
+    this.color = _color || 'white';
+    this.url   = _url   || '';
   }
 
   get humanDateFr(): string {

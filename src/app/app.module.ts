@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SafeUrlPipeModule } from './safe-url.pipe.module';
 import { ArchiveService } from './archive.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeFr);
 @NgModule({
@@ -32,7 +33,8 @@ registerLocaleData(localeFr);
     SafeUrlPipeModule,
 
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgbModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

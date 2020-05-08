@@ -1,0 +1,48 @@
+
+$paradise_pink: #EF476F;
+$orange_yellow: #FFD166;
+$caribbean_green: #06D6A0;
+$blue_ncs: #118AB2;
+$midnight_green: #073B4C;
+
+$pink: $paradise_pink;
+$yellow: $orange_yellow;
+$green: $caribbean_green;
+$blue: $blue_ncs;
+$midnight_blue: $midnight_green;
+
+$lighten: 5;
+$darken: 25;
+
+$colors: (
+  pink: (
+    base: $pink,
+    light: lighten($pink, $lighten),
+    dark: darken($pink, $darken),
+  ),
+  yellow: (
+    base: $yellow,
+    light: lighten($yellow, $lighten),
+    dark: darken($yellow, $darken),
+  ),
+  green: (
+    base: $green,
+    light: lighten($green, $lighten),
+    dark: darken($green, $darken),
+  ),
+  blue: (
+    base: $blue,
+    light: lighten($blue, $lighten),
+    dark: darken($blue, $darken),
+  ),
+  midnight_blue: (
+    base: $courses,
+    light: lighten($courses, $lighten),
+    dark: darken($courses, $darken),
+  )
+);
+
+@function clr($base, $shade: base) {
+  $color: map-get(map-get($colors, $base), $shade);
+  @return $color;
+}
