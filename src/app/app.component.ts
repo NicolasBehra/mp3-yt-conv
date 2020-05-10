@@ -1,5 +1,5 @@
-import { YtUrlService } from './yt-url.service';
-import { YtUrl } from './yt-url.model';
+import { YtUrlService } from './services/yt-url.service';
+import { YtUrl } from './models/yt-url.model';
 import { Component } from '@angular/core';
 
 @Component({

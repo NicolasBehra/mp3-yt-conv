@@ -1,4 +1,4 @@
-import { ConverterModule } from './converter/converter.module';
+import { ConverterModule } from './components/converter/converter.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { 
@@ -14,8 +14,8 @@ import {
 
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SafeUrlPipeModule } from './safe-url.pipe.module';
-import { YtUrlService } from './yt-url.service';
+import { SafeUrlPipeModule } from './pipes/safe-url/safe-url.pipe.module';
+import { YtUrlService } from './services/yt-url.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeFr);

@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ConverterComponent } from './converter.component';
-import { SafeUrlPipeModule } from '../safe-url.pipe.module';
+import { SafeUrlPipeModule } from '../../pipes/safe-url/safe-url.pipe.module';
 
 
 @NgModule({

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { option } from 'ts-option';
 
-import { YtUrlService } from '../yt-url.service';
-import { YtUrl } from '../yt-url.model';
+import { YtUrlService } from '../../services/yt-url.service';
+import { YtUrl } from '../../models/yt-url.model';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

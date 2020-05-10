@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { YtUrl } from './yt-url.model';
+import { YtUrl } from '../models/yt-url.model';
 import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
