@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ArchivesModule }    from '@components/archives/archives.module';
 import { ConverterModule }   from '@components/converters/converter/converter.module';
+import { ConvertersModule }   from '@components/converters/converters.module';
 
 import { HomePageModule }    from '@pages/home-page/home-page.module';
 
@@ -36,6 +37,7 @@ registerLocaleData(localeFr);
 
     ArchivesModule,
     ConverterModule,
+    ConvertersModule,
 
     HomePageModule,
 
