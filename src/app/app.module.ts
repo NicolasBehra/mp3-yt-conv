@@ -1,24 +1,26 @@
-import { ConverterModule } from './components/converter/converter.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { 
-  registerLocaleData } from '@angular/common';
-import localeFr                   from '@angular/common/locales/fr';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData }      from '@angular/common';
+import localeFr                    from '@angular/common/locales/fr';
+import { NgModule }                from '@angular/core';
 import {
   MAT_DATE_LOCALE
-} from '@angular/material/core';
+}                                  from '@angular/material/core';
+import { MatTableModule }          from '@angular/material/table';
+import { MatToolbarModule }        from '@angular/material/toolbar';
+import { BrowserModule }           from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { SafeUrlPipeModule } from './pipes/safe-url/safe-url.pipe.module';
-import { YtUrlService } from './services/yt-url.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { ConverterModule }   from '@components/converter/converter.module';
+import { HomePageModule }    from '@pages/home-page/home-page.module';
+import { SafeUrlPipeModule } from '@pipes/safe-url/safe-url.pipe.module';
+import { YtUrlService }      from '@services/yt-url.service';
+
+import { AppComponent }     from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 registerLocaleData(localeFr);
+
 @NgModule({
   declarations: [
     AppComponent
@@ -29,6 +31,8 @@ registerLocaleData(localeFr);
     BrowserAnimationsModule,
 
     ConverterModule,
+
+    HomePageModule,
 
     SafeUrlPipeModule,
 
