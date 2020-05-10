@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { YtUrl } from '../models/yt-url.model';
+
 import { Subject } from 'rxjs/internal/Subject';
+
+import { YtUrl } from '@models/yt-url.model';
 
 @Injectable({
   providedIn: 'root'

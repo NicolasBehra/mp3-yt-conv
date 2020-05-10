@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { SafeUrlPipe } from './safe-url.pipe';
 
 @NgModule({
