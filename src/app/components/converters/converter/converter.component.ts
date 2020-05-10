@@ -25,9 +25,9 @@ export class ConverterComponent {
 
   @Input() color: string = 'white';
 
-  youtubeUrlCtrl: AbstractControl;
+  ytUrlCtrl: AbstractControl;
 
-  private archive: YtUrl;
+  private ytUrl: YtUrl;
 
   private prevInput: string = '';
   private _onDestroy = new Subject();
@@ -35,32 +35,11 @@ export class ConverterComponent {
   constructor(
     private archiveService: YtUrlService
   ) {
-    this.youtubeUrlCtrl = new FormControl();
+    this.ytUrlCtrl = new FormControl();
   }
 
   ngOnInit() {
-    this.youtubeUrlCtrl
-    .valueChanges
-    .pipe(takeUntil(this._onDestroy))
-    .subscribe(
-      (data) => {     
-        if (
-          option(data).isDefined
-          && data.trim() !== ''
-          && data !== this.prevInput
-        ) {
-          this.prevInput = data;
-
-          if (this.isValidYoutubeUrl(data)) {
-            this.archive = new YtUrl(
-              data,
-              this.color
-            );
-            this.archiveService.add(this.archive);
-          }
-        }
-      }
-    )
+    this.onYtUrlCtrlChanges();
   }
 
   ngOnDestroy() {
@@ -74,10 +53,16 @@ export class ConverterComponent {
   }
 
   get videoId(): string {
-    if (option(this.archive).isDefined)
-      return this.archive.videoId;
+    if (option(this.ytUrl).isDefined)
+      return this.ytUrl.videoId;
 
     return '';
+  }
+
+  refresh(event: Event): void {
+    this.ytUrl = new YtUrl();
+    this.prevInput = '';
+    this.ytUrlCtrl.setValue('');
   }
 
   isVideoIdDefined(): boolean {
@@ -90,7 +75,6 @@ export class ConverterComponent {
       option(url).isDefined
       && url.trim() !== ''
       && url.indexOf('https://www.youtube.com/watch?v=') === 0
-      && url.split('&').length > 2
     );
   }
 
@@ -98,6 +82,31 @@ export class ConverterComponent {
     return new RegExp(
       '^https:\/\/www\.youtube\.com\/watch\?'
     ).test(text);
+  }
+
+  private onYtUrlCtrlChanges(): void {
+    this.ytUrlCtrl
+    .valueChanges
+    .pipe(takeUntil(this._onDestroy))
+    .subscribe(
+      (data) => {     
+        if (
+          option(data).isDefined
+          && data.trim() !== ''
+          && data !== this.prevInput
+        ) {
+          this.prevInput = data;
+
+          if (this.isValidYoutubeUrl(data)) {
+            this.ytUrl = new YtUrl(
+              data,
+              this.color
+            );
+            this.archiveService.add(this.ytUrl);
+          }
+        }
+      }
+    );
   }
 
 }

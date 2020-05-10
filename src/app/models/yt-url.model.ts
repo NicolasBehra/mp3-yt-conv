@@ -24,9 +24,13 @@ export class YtUrl {
   }
 
   get videoId(): string {
+    if (this.url.indexOf('&') > -1)
+      return this.url
+      .split('?v=')[1]
+      .split('&')[0];
+    
     return this.url
-    .split('?v=')[1]
-    .split('&')[0];
+    .split('?v=')[1];
   }
 
   get humanDateFr(): string {

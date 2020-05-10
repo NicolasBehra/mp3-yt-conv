@@ -2,14 +2,19 @@
         [style]="'background-color:' + color">
   <mat-icon>brush</mat-icon>
 </button>
+<button mat-mini-fab
+        (click)="refresh($event)"
+        style="background-color: white; color: black; margin-left: 20px;">
+  <mat-icon>refresh</mat-icon>
+</button>
 <mat-form-field style="width: 90%;">
   <mat-label>Youtube Url</mat-label>
   <input matInput
          placeholder="My Youtube Url"
-         [formControl]="youtubeUrlCtrl"
+         [formControl]="ytUrlCtrl"
          onfocus="this.select()"
          required>
-  <mat-error *ngIf="!isValidYoutubeUrl(youtubeUrlCtrl.value)">
+  <mat-error *ngIf="!isValidYoutubeUrl(ytUrlCtrl.value)">
     Please enter a valid youtube url
   </mat-error>
 </mat-form-field>
@@ -18,7 +23,7 @@
 </p>
 
 <div>
-  <iframe *ngIf="isValidYoutubeUrl(youtubeUrlCtrl.value)"
+  <iframe *ngIf="isValidYoutubeUrl(ytUrlCtrl.value)"
           [src]="iFrameUrl | safeUrl"
           width="100%"
           height="40px"
