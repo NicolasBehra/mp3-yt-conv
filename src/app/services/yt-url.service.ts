@@ -9,7 +9,7 @@ import { YtUrl } from '@models/yt-url.model';
 })
 export class YtUrlService {
 
-  archives: Array<YtUrl>;
+  archives  : Array<YtUrl>;
   newArchive: Subject<YtUrl>;
 
   constructor() {

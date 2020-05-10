@@ -1,0 +1,35 @@
+<div *ngIf="isArchivesDefined()"
+     style="padding: 60px; width: 100%;">
+  <h2>Historique</h2>
+
+  <table mat-table
+         [dataSource]="dataSource"
+         class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let archive"> {{ archive.humanDateFr }} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="videoId">
+      <th mat-header-cell *matHeaderCellDef> Vidéo ID </th>
+      <td mat-cell *matCellDef="let archive"> {{ archive.videoId }} </td>
+    </ng-container>
+    
+    <!-- Name Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef> Url </th>
+      <td mat-cell *matCellDef="let archive"> {{ archive.url }} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        [style.background-color]="row.color"></tr>
+  </table>
+</div>
