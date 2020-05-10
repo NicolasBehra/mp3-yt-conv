@@ -16,21 +16,16 @@ export class ConverterComponent {
 
   @Input() color: string = 'white';
 
-  youtubeUrl: string = '';
   youtubeUrlCtrl: AbstractControl;
 
-  private prevYoutubeUrl: string = '';
+  private archive: Archive;
+
   private prevInput: string = '';
-  private _videoId: string = '';
   private _onDestroy = new Subject();
 
   constructor(
     private archiveService: ArchiveService
   ) {
-    this.youtubeUrl = '';
-
-    this.prevYoutubeUrl = '';
-    this._videoId = '';
     this.youtubeUrlCtrl = new FormControl();
   }
 
@@ -39,7 +34,7 @@ export class ConverterComponent {
     .valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(
-      (data) => {        
+      (data) => {     
         if (
           option(data).isDefined
           && data.trim() !== ''
@@ -47,8 +42,13 @@ export class ConverterComponent {
         ) {
           this.prevInput = data;
 
-          if (this.isValidYoutubeUrl(data))
-            this.youtubeUrl = data;
+          if (this.isValidYoutubeUrl(data)) {
+            this.archive = new Archive(
+              data,
+              this.color
+            );
+            this.archiveService.add(this.archive);
+          }
         }
       }
     )
@@ -59,35 +59,16 @@ export class ConverterComponent {
     this._onDestroy.complete();
   }
 
-  get archives(): Array<Archive> {
-    return this.archiveService.archives;
-  }
-
-  get videoId(): string {
-    if (
-      this.youtubeUrl !== ''
-      && this.youtubeUrl !== this.prevYoutubeUrl
-      && this.isValidYoutubeUrl(this.youtubeUrl)
-    ) {
-      this.prevYoutubeUrl = this.youtubeUrl;
-      setTimeout(
-        () =>
-        this.archives.unshift(
-          new Archive(
-            this.youtubeUrl,
-            this.color))
-        );
-
-      return this._videoId = this.youtubeUrl
-      .split('?v=')[1].split('&')[0];
-    }
-
-    return this._videoId;
-  }
-
   get iFrameUrl(): string {
     return 'https://youtube2mp3api.com/@api/button/mp3/'
     + this.videoId;
+  }
+
+  private get videoId(): string {
+    if (option(this.archive).isDefined)
+      return this.archive.videoId;
+
+    return '';
   }
 
   isVideoIdDefined(): boolean {

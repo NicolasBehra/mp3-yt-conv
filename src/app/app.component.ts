@@ -9,14 +9,26 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  dataSource: Array<Archive>;
+
   displayedColumns: string[] = [
     'date',
+    'videoId',
     'url'
   ];
 
   constructor(
     private archiveService: ArchiveService
   ) {
+    this.dataSource = [];
+  }
+
+  ngOnInit() {
+    this.archiveService.newArchive
+    .subscribe(
+      (archive: Archive) =>
+        this.dataSource = [...this.archives]
+    )
   }
 
   get archives(): Array<Archive> {

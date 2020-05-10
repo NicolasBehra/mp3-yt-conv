@@ -23,6 +23,12 @@ export class Archive {
     this.url   = _url   || '';
   }
 
+  get videoId(): string {
+    return this.url
+    .split('?v=')[1]
+    .split('&')[0];
+  }
+
   get humanDateFr(): string {
     return DateManager.toInput_full_at(
       this.date
