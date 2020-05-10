@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { option } from 'ts-option';
 
-import { ArchiveService } from './../archive.service';
-import { Archive } from '../archive.model';
+import { YtUrlService } from '../yt-url.service';
+import { YtUrl } from '../yt-url.model';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -18,13 +18,13 @@ export class ConverterComponent {
 
   youtubeUrlCtrl: AbstractControl;
 
-  private archive: Archive;
+  private archive: YtUrl;
 
   private prevInput: string = '';
   private _onDestroy = new Subject();
 
   constructor(
-    private archiveService: ArchiveService
+    private archiveService: YtUrlService
   ) {
     this.youtubeUrlCtrl = new FormControl();
   }
@@ -43,7 +43,7 @@ export class ConverterComponent {
           this.prevInput = data;
 
           if (this.isValidYoutubeUrl(data)) {
-            this.archive = new Archive(
+            this.archive = new YtUrl(
               data,
               this.color
             );
@@ -64,7 +64,7 @@ export class ConverterComponent {
     + this.videoId;
   }
 
-  private get videoId(): string {
+  get videoId(): string {
     if (option(this.archive).isDefined)
       return this.archive.videoId;
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ArchiveService } from './archive.service';
+import { YtUrlService } from './yt-url.service';
 
 describe('ArchiveService', () => {
-  let service: ArchiveService;
+  let service: YtUrlService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ArchiveService);
+    service = TestBed.inject(YtUrlService);
   });
 
   it('should be created', () => {

@@ -1,5 +1,5 @@
-import { ArchiveService } from './archive.service';
-import { Archive } from './archive.model';
+import { YtUrlService } from './yt-url.service';
+import { YtUrl } from './yt-url.model';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  dataSource: Array<Archive>;
+  dataSource: Array<YtUrl>;
 
   displayedColumns: string[] = [
     'date',
@@ -18,7 +18,7 @@ export class AppComponent {
   ];
 
   constructor(
-    private archiveService: ArchiveService
+    private archiveService: YtUrlService
   ) {
     this.dataSource = [];
   }
@@ -26,12 +26,12 @@ export class AppComponent {
   ngOnInit() {
     this.archiveService.newArchive
     .subscribe(
-      (archive: Archive) =>
+      (archive: YtUrl) =>
         this.dataSource = [...this.archives]
     )
   }
 
-  get archives(): Array<Archive> {
+  get archives(): Array<YtUrl> {
     return this.archiveService.archives;
   }
 

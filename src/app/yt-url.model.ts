@@ -1,6 +1,6 @@
 import { DateManager } from './date-manager';
 
-export class Archive {
+export class YtUrl {
 
   url : string;
   date: Date;

@@ -15,7 +15,7 @@ import {
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SafeUrlPipeModule } from './safe-url.pipe.module';
-import { ArchiveService } from './archive.service';
+import { YtUrlService } from './yt-url.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeFr);
@@ -39,7 +39,7 @@ registerLocaleData(localeFr);
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
 
-    ArchiveService
+    YtUrlService
   ],
   bootstrap: [AppComponent]
 })
