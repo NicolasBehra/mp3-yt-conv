@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ArchivesModule }    from '@components/archives/archives.module';
-import { ConverterModule }   from '@components/converter/converter.module';
+import { ConverterModule }   from '@components/converters/converter/converter.module';
 
 import { HomePageModule }    from '@pages/home-page/home-page.module';
 
